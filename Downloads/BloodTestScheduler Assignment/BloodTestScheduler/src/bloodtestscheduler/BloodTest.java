@@ -9,12 +9,30 @@ package bloodtestscheduler;
  * @author Kevin
  */
 public class BloodTest {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+    private String name;
+    private String priority;
+    private String gpDetails;
     
+    public BloodTest(String name, String priority, String gpDetails){
+        this.name = name;
+        this.priority = priority;
+        this.gpDetails = gpDetails;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public String getGpDetails() {
+        return gpDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "Blood Test for " + name + " (Priortiy: " + priority + ", GP:" + gpDetails + ")";
+    }
 }
