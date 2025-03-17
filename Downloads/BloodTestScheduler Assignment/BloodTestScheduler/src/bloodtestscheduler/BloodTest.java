@@ -9,11 +9,12 @@ package bloodtestscheduler;
  * @author Kevin
  */
 public class BloodTest {
+
     private String name;
     private String priority;
     private String gpDetails;
-    
-    public BloodTest(String name, String priority, String gpDetails){
+
+    public BloodTest(String name, String priority, String gpDetails) {
         this.name = name;
         this.priority = priority;
         this.gpDetails = gpDetails;
