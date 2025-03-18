@@ -4,17 +4,77 @@
  */
 package bloodtestscheduler;
 
+import javax.swing.*;
+import java.awt.event.*;
+
 /**
  *
  * @author Kevin
  */
 public class TestScheduler extends javax.swing.JFrame {
+    private Scheduler scheduler = new Scheduler();
    
     /**
      * Creates new form TestScheduler
      */
     public TestScheduler() {
-       initComponents();
+        initComponents();
+        setTitle("Test Scheduler");
+        
+        prioritybx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Critical", "Medium", "Non-Urgent"}));
+        
+        addbtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt) {
+                addTestAction();
+            }
+        });
+        
+        nextbtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                nextPatientAction();
+            }
+        });
+        
+        cancelledbtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                markCancelledAction();
+            }
+        });
+    }
+    
+    private void addTestAction(){
+        String name = nametf.getText();
+        String priority = (String) prioritybx.getSelectedItem();
+        String gpDetails = gptf.getText().trim();
+        
+        if (name.isEmpty()|| gpDetails.isEmpty()){
+            JOptionPane.showMessageDialog(this, "fill all empty fields.");
+            return;
+        }
+        
+        BloodTest test = new BloodTest(name, priority, gpDetails);
+        scheduler.addTest(test);
+        displayae.append("Added: " + test + "\n");
+        nametf.setText("");
+        gptf.setText("");
+    }
+    
+    private void nextPatientAction(){
+        BloodTest nextTest = scheduler.getNextTest();
+        if (nextTest != null){
+            displayae.append("Next: " + nextTest + "\n");
+        } else {
+            JOptionPane.showMessageDialog(this, "No more tests waiting.");
+        }
+}
+    
+    private void markCancelledAction() {
+        BloodTest lastNoShow = scheduler.markNoShow();
+        if (lastNoShow !=null){
+            displayae.append("Cancelled: " + lastNoShow + "\n");
+        } else {
+            JOptionPane.showMessageDialog(this, "No cancellations to report.");
+        }        
     }
     
     /**
