@@ -46,17 +46,19 @@ public class TestScheduler extends javax.swing.JFrame {
         String name = nametf.getText();
         String priority = (String) prioritybx.getSelectedItem();
         String gpDetails = gptf.getText().trim();
+        boolean fromWard = hospbx.isSelected();
         
         if (name.isEmpty()|| gpDetails.isEmpty()){
             JOptionPane.showMessageDialog(this, "fill all empty fields.");
             return;
         }
         
-        BloodTest test = new BloodTest(name, priority, gpDetails);
+        BloodTest test = new BloodTest(name, priority, gpDetails, fromWard);
         scheduler.addTest(test);
         displayae.append("Added: " + test + "\n");
         nametf.setText("");
         gptf.setText("");
+        hospbx.setSelected(false);
     }
     
     private void nextPatientAction(){
@@ -98,6 +100,7 @@ public class TestScheduler extends javax.swing.JFrame {
         gplbl = new javax.swing.JLabel();
         prioritylbl = new javax.swing.JLabel();
         queuelbl = new javax.swing.JLabel();
+        hospbx = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +123,8 @@ public class TestScheduler extends javax.swing.JFrame {
         prioritylbl.setText("Priority:");
 
         queuelbl.setText("Updates");
+
+        hospbx.setText("Hospital Ward?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,19 +150,22 @@ public class TestScheduler extends javax.swing.JFrame {
                             .addComponent(cancelledbtn))
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hospbx)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(68, 68, 68)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gptf, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(gplbl, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addComponent(namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(68, 68, 68)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(gptf, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(gplbl, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -180,7 +188,9 @@ public class TestScheduler extends javax.swing.JFrame {
                     .addComponent(nametf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gptf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prioritybx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(hospbx)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nextbtn)
                     .addComponent(addbtn)
@@ -239,6 +249,7 @@ public class TestScheduler extends javax.swing.JFrame {
     private javax.swing.JTextArea displayae;
     private javax.swing.JLabel gplbl;
     private javax.swing.JTextField gptf;
+    private javax.swing.JCheckBox hospbx;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel namelbl;
     private javax.swing.JTextField nametf;

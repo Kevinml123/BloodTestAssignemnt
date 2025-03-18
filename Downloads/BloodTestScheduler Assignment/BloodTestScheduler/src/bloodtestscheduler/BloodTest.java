@@ -13,11 +13,17 @@ public class BloodTest {
     private String name;
     private String priority;
     private String gpDetails;
+    private boolean fromWard;
 
-    public BloodTest(String name, String priority, String gpDetails) {
+    public BloodTest(String name, String priority, String gpDetails, boolean fromWard) {
         this.name = name;
         this.priority = priority;
         this.gpDetails = gpDetails;
+        this.fromWard = fromWard;
+    }
+    
+    public boolean isFromWard(){
+        return fromWard;
     }
 
     public String getName() {
@@ -34,6 +40,6 @@ public class BloodTest {
 
     @Override
     public String toString() {
-        return "Blood Test for " + name + " (Priortiy: " + priority + ", GP:" + gpDetails + ")";
+        return "Blood Test for " + name + " (Priortiy: " + priority + ", GP:" + gpDetails + (fromWard ? ", From Hospital Ward" : ", Normaal patient")+ ")";
     }
 }
