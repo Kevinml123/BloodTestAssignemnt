@@ -9,14 +9,14 @@ package bloodtestscheduler;
  * @author Kevin
  */
 public class TestScheduler extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form TestScheduler
      */
     public TestScheduler() {
-        initComponents();
+       initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

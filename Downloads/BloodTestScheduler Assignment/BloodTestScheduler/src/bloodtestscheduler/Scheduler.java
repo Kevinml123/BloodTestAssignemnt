@@ -4,16 +4,13 @@
  */
 package bloodtestscheduler;
 
-import java.util.PriorityQueue;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  *
  * @author Kevin
  */
-public class Scheduler {
-
+public class Scheduler implements SchedulerI {
     private PriorityQueue<BloodTest> testQueue;
     private Queue<BloodTest> cancelledQueue;
 
@@ -49,4 +46,11 @@ public class Scheduler {
         }
         cancelledQueue.add(test);
     }
-}
+    
+    public BloodTest markNoShow(){
+        if (testQueue.isEmpty())return null;
+        BloodTest noShowTest = testQueue.poll();
+        addCancelled(noShowTest);
+            return noShowTest;
+        }
+ }
